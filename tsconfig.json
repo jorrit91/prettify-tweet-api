@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "outDir": "dist",
+    "strict": false,
+    "lib": ["esnext"],
+    "target": "ES2018",
+    "module": "CommonJS",
+    "skipLibCheck": true,
+    "downlevelIteration": true,
+    "esModuleInterop": true,
+    "rootDir": ".",
+    // "noUnusedLocals": true,
+    "plugins": [
+      {
+        "name": "nexus/typescript-language-service"
+      }
+    ],
+    "typeRoots": [
+      "node_modules/@types",
+      "node_modules/@types/nexus-typegen",
+      "types",
+      "../../node_modules/@types"
+    ]
+  },
+  "include": [".", "graphql.ts"]
+}

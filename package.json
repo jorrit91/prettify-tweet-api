@@ -1,0 +1,27 @@
+{
+  "name": "prettify-tweet-api-try",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "ts-node dist/index.js",
+    "dev": "concurrently 'tsc --watch' 'nodemon'",
+    "generate": "ts-node -T api/graphql.ts --nexus-generate"
+  },
+  "devDependencies": {
+    "concurrently": "6.5.1",
+    "ts-node": "10.4.0",
+    "typescript": "4.5.4"
+  },
+  "dependencies": {
+    "dotenv": "10.0.0",
+    "fastify": "3.25.0",
+    "graphql-iso-date": "3.6.1",
+    "mercurius": "7.9.1",
+    "nexus": "1.1.0",
+    "nexus-validate": "1.2.0",
+    "puppeteer": "13.0.0",
+    "twitter-api-v2": "1.9.0",
+    "yup": "0.32.11"
+  }
+}
