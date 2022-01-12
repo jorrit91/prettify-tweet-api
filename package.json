@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "ts-node dist/index.js",
+    "start": "ts-node api/index.ts",
     "dev": "concurrently 'tsc --watch' 'nodemon'",
     "generate": "ts-node -T api/graphql.ts --nexus-generate"
   },
@@ -16,6 +16,7 @@
   "dependencies": {
     "dotenv": "10.0.0",
     "fastify": "3.25.0",
+    "fastify-cors": "6.0.2",
     "graphql-iso-date": "3.6.1",
     "mercurius": "7.9.1",
     "nexus": "1.1.0",
