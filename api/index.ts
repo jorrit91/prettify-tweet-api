@@ -13,4 +13,4 @@ app.register(cors, {
   methods: ["GET", "POST", "OPTIONS"],
 })
 app.register(mercurius, options)
-app.listen(process.env.PORT || 4000)
+app.listen(process.env.PORT || 4000, "0.0.0.0")
