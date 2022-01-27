@@ -23,4 +23,5 @@ type Tweet {
   source: String!
   text: String!
   username: String!
+  verified: Boolean!
 }

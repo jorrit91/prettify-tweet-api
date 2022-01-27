@@ -10,6 +10,7 @@ export const Tweet = objectType({
     t.nonNull.string("profileImageUrl")
     t.nonNull.string("createdAt")
     t.nonNull.string("text")
+    t.nonNull.boolean("verified")
     t.nonNull.string("source", {
       resolve: () => "Prettify Tweet",
     })

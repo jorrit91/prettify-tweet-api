@@ -5,4 +5,5 @@ export type SingleTweetData = {
   profileImageUrl: string
   createdAt: string
   text: string
+  verified: boolean
 }
