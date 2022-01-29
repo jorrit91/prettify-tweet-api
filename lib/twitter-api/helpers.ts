@@ -28,7 +28,10 @@ export function normalizeTweetData(
     source: tweet.data.source,
     name: tweet.includes.users[0].name,
     username: tweet.includes.users[0].username,
-    profileImageUrl: tweet.includes.users[0].profile_image_url,
+    profileImageUrl: tweet.includes.users[0].profile_image_url.replace(
+      "_normal",
+      ""
+    ),
     createdAt: tweet.data.created_at,
     text: tweet.data.text,
     verified: tweet.includes.users[0].verified,

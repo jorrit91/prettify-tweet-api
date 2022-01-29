@@ -1,6 +1,7 @@
 import { objectType } from "nexus"
 
 export * from "./get-tweet-data"
+export * from "./get-screenshot"
 
 export const Tweet = objectType({
   name: "Tweet",
@@ -14,5 +15,13 @@ export const Tweet = objectType({
     t.nonNull.string("source", {
       resolve: () => "Prettify Tweet",
     })
+  },
+})
+
+export const GetScreenshot = objectType({
+  name: "GetScreenshot",
+  definition: (t) => {
+    t.nonNull.string("url")
+    t.nonNull.string("filename")
   },
 })
