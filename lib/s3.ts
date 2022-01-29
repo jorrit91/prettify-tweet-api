@@ -16,6 +16,7 @@ export function getS3Client(): S3 {
       secretAccessKey: process.env.S3_SECRET,
     }))
   }
+
   return client
 }
 
