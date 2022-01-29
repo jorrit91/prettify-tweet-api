@@ -1,12 +1,5 @@
 import { S3 } from "aws-sdk"
 
-const config = {
-  bucketName: "prettify-tweet-image-storage",
-  region: "eu-west-1",
-  accessKeyId: process.env.SCALEWAY_SECRET_KEY,
-  secretAccessKey: process.env.SCALEWAY_ACCESS_KEY,
-}
-
 let client: S3 | null = null
 
 export function getS3Client(): S3 {
@@ -19,8 +12,8 @@ export function getS3Client(): S3 {
   if (!client) {
     return (client = new S3({
       endpoint: "ams3.digitaloceanspaces.com",
-      accessKeyId: "UM4ZPSJXWPTWKDYBOBR6",
-      secretAccessKey: "SO1qLEG8O9PJHz8JEKLtjXJb88FtuAvOku/sqCSqPKg",
+      accessKeyId: process.env.S3_ACCESS_KEY,
+      secretAccessKey: process.env.S3_SECRET,
     }))
   }
   return client
