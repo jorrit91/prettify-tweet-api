@@ -2,7 +2,7 @@ import { extendType, stringArg } from "nexus"
 import puppeteer from "puppeteer"
 import { getS3Client, uploadFileGetTemporaryUrl } from "../../../lib/s3"
 import * as fs from "fs"
-import { getPuppeteerScreenshot } from "../../../lib/get-puppeteer-screenshot"
+import { getScreenshot as getPuppeteerScreenshot } from "../../../lib/get-screenshot"
 
 export const getScreenshot = extendType({
   type: "Mutation",
@@ -14,7 +14,7 @@ export const getScreenshot = extendType({
         color: stringArg(),
         layout: stringArg(),
       },
-      resolve: async (_, { tweetId, color, layout }, { twitterAPI }) => {
+      resolve: async (_, { tweetId, color, layout }) => {
         const imageType = "png"
 
         try {

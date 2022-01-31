@@ -1,4 +1,4 @@
-import puppeteer from "puppeteer"
+import { getPuppeteerInstance } from "./get-puppeteer-instance"
 
 type ScreenshotArgs = {
   tweetId: string
@@ -6,13 +6,12 @@ type ScreenshotArgs = {
   layout: string
 }
 
-export async function getPuppeteerScreenshot({
+export async function getScreenshot({
   tweetId,
   color,
   layout,
 }: ScreenshotArgs): Promise<string | Buffer> {
-  const browser = await puppeteer.launch({ headless: true })
-
+  const browser = await getPuppeteerInstance()
   const page = await browser.newPage()
   await page.setViewport({
     width: 800,
