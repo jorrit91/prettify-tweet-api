@@ -24,9 +24,17 @@ export const getTwitterAPI = (): TwitterAPI => {
     async getTweetById(id: string) {
       try {
         const tweet = await client.v2.singleTweet(id, {
-          expansions: ["author_id"],
+          expansions: ["author_id", "attachments.media_keys"],
           "user.fields": ["name", "username", "profile_image_url", "verified"],
-          "tweet.fields": ["id", "created_at", "text", "source", "attachments"],
+          "tweet.fields": [
+            "id",
+            "created_at",
+            "text",
+            "source",
+            "attachments",
+            "entities",
+          ],
+          "media.fields": ["height", "width", "url"],
         })
         const normalized = normalizeTweetData(tweet)
 

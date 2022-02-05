@@ -3,11 +3,11 @@ import { S3 } from "aws-sdk"
 let client: S3 | null = null
 
 export function getS3Client(): S3 {
-  if (!process.env.SCALEWAY_SECRET_KEY) {
-    console.error("SCALEWAY_SECRET_KEY not found")
+  if (!process.env.S3_ACCESS_KEY) {
+    console.error("S3_ACCESS_KEY not found")
   }
-  if (!process.env.SCALEWAY_ACCESS_KEY) {
-    console.error("SCALEWAY_ACCESS_KEY not found")
+  if (!process.env.S3_SECRET) {
+    console.error("S3_SECRET not found")
   }
   if (!client) {
     return (client = new S3({
@@ -41,12 +41,12 @@ export async function uploadFileGetTemporaryUrl({
       ContentType: mimetype,
     })
     .promise()
-
+  console.log("henk")
   const url = client.getSignedUrl("getObject", {
     Key,
     Bucket: "prettify-tweet-spaces",
     Expires: 60 * 5,
   })
-
+  console.log({ url })
   return url
 }

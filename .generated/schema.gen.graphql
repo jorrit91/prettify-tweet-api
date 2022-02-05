@@ -12,12 +12,28 @@ A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `dat
 """
 scalar DateTime
 
+type GetScreenshot {
+  filename: String!
+  url: String!
+}
+
+type Media {
+  height: Int
+  url: String!
+  width: Int
+}
+
+type Mutation {
+  getScreenshot(color: String, layout: String, tweetId: String): GetScreenshot
+}
+
 type Query {
   getTweetData(tweetId: String): Tweet
 }
 
 type Tweet {
   createdAt: String!
+  media: [Media]
   name: String!
   profileImageUrl: String!
   source: String!
