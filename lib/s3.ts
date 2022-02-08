@@ -41,7 +41,6 @@ export async function uploadFileGetTemporaryUrl({
       ContentType: mimetype,
     })
     .promise()
-  console.log("henk")
   const url = client.getSignedUrl("getObject", {
     Key,
     Bucket: "prettify-tweet-spaces",
