@@ -16,7 +16,7 @@ export const getScreenshot = extendType({
         const imageType = "png"
 
         try {
-          const response = await fetch(
+          const response: any = await fetch(
             `https://api.rasterwise.com/v1/get-screenshot?apikey=${process.env.GET_SCREENSHOT_KEY}&url=https://2446-2a02-a44d-7142-1-f41f-15e0-f1a2-f3d2.ngrok.io/screenshot?id=1490055796704497665&color=dark&layout=auto&element=#preview-parent`
           ).then((response) => response.json())
           const peter = response.screenshotImage
