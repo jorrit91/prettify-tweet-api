@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "ts-node api/index.ts",
+    "start": "ts-node --optimize_for_size --max_old_space_size=460  api/index.ts",
     "dev": "concurrently 'tsc --watch' 'nodemon'",
     "generate": "ts-node -T api/graphql.ts --nexus-generate"
   },
