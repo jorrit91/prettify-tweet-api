@@ -1,9 +1,15 @@
-import { MediaObjectV2 } from "twitter-api-v2"
-
 export type Media = {
   height?: number
   width?: number
   url: string
+  type: "video" | "photo"
+}
+
+export type UrlPreview = {
+  title: string
+  description: string
+  url: string
+  imageUrl: string
 }
 
 export type SingleTweetData = {
@@ -15,4 +21,5 @@ export type SingleTweetData = {
   text: string
   verified: boolean
   media: Media[]
+  urlPreview?: UrlPreview
 }

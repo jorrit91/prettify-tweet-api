@@ -1,9 +1,6 @@
 import { TweetV2SingleResult } from "twitter-api-v2"
 import { FAILED_TO_NORMALIZE } from "../errors"
-import { Media, SingleTweetData } from "./types"
-
-const userKeys = ["name", "username", "profile_image_url", "verified"]
-const tweetKeys = ["source", "created_at", "text"]
+import { Media, SingleTweetData, UrlPreview } from "./types"
 
 export function normalizeTweetData(
   tweet: TweetV2SingleResult
@@ -16,6 +13,7 @@ export function normalizeTweetData(
 
   let media = getMediaItems(tweet)
   let text = getText(tweet)
+  let urlPreview = getUrlPreview(tweet)
 
   return {
     source: tweet.data.source,
@@ -27,39 +25,74 @@ export function normalizeTweetData(
     ),
     createdAt: tweet.data.created_at,
     text,
+    urlPreview,
     verified: tweet.includes.users[0].verified,
     media,
   }
 }
 
+function getUrlPreview(tweet: TweetV2SingleResult) {
+  if (tweet.data.entities && tweet.data.entities.urls) {
+    let preview: null | UrlPreview = null
+    tweet.data.entities.urls.forEach((item) => {
+      if (item.images.length > 0) {
+        preview = {
+          title: item.title,
+          url: item.url,
+          imageUrl: item.images[0].url,
+          description: item.description,
+        }
+      }
+    })
+    return preview
+  }
+  return null
+}
+
 function getText(tweet: TweetV2SingleResult) {
   let text: string = tweet.data.text
 
-  if (tweet.data.entities && tweet.data.entities.urls) {
-    tweet.data.entities.urls.forEach((url) => {
-      // Remove picture urls from body text
-      if (url.display_url.includes("pic.twitter")) {
-        text = text.replace(url.url, "")
-        return
-      }
+  if (tweet.data.entities) {
+    if (tweet.data.entities.urls) {
+      tweet.data.entities.urls.forEach((url) => {
+        // Remove picture urls from body text
+        if (url.display_url.includes("pic.twitter")) {
+          text = text.replace(url.url, "")
+          return
+        }
 
-      // Replace regular urls with human readable links
-      text = text.replace(url.url, url.display_url)
-    })
+        // Replace regular urls with human readable links
+        text = text.replace(url.url, `<span>${url.display_url}</span>`)
+      })
+    }
+
+    if (tweet.data.entities.mentions) {
+      tweet.data.entities.mentions.forEach((mention) => {
+        // Wrap mentions in a span
+        text = text.replace(
+          `@${mention.username}`,
+          `<span>@${mention.username}</span>`
+        )
+      })
+    }
   }
-
   return text
 }
 
 function getMediaItems(tweet: TweetV2SingleResult): Media[] {
   let media: Media[] = []
+
   if (tweet.includes.media && tweet.includes.media[0]) {
     tweet.includes.media.forEach((item) => {
-      if (item.url) {
+      if (item.type === "photo") {
         media.push(item as Media)
+      }
+      if (item.type === "video") {
+        media.push({ ...(item as Media), url: item.preview_image_url })
       }
     })
   }
+
   return media
 }
 

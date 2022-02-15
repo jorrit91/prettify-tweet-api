@@ -19,6 +19,7 @@ type GetScreenshot {
 
 type Media {
   height: Int
+  type: String!
   url: String!
   width: Int
 }
@@ -38,6 +39,14 @@ type Tweet {
   profileImageUrl: String!
   source: String!
   text: String!
+  urlPreview: UrlPreview
   username: String!
   verified: Boolean!
+}
+
+type UrlPreview {
+  description: String!
+  imageUrl: String!
+  title: String!
+  url: String!
 }

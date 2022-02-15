@@ -8,7 +8,18 @@ export const Media = objectType({
   definition: (t) => {
     t.int("height")
     t.int("width")
+    t.nonNull.string("type")
     t.nonNull.string("url")
+  },
+})
+
+export const UrlPreview = objectType({
+  name: "UrlPreview",
+  definition: (t) => {
+    t.nonNull.string("imageUrl")
+    t.nonNull.string("url")
+    t.nonNull.string("title")
+    t.nonNull.string("description")
   },
 })
 
@@ -26,6 +37,9 @@ export const Tweet = objectType({
     })
     t.list.field("media", {
       type: Media,
+    })
+    t.field("urlPreview", {
+      type: UrlPreview,
     })
   },
 })

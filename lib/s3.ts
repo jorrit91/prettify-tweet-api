@@ -36,16 +36,18 @@ export async function uploadFileGetTemporaryUrl({
   await client
     .upload({
       Key,
+      ACL: "authenticated-read",
       Body: stream,
-      Bucket: "prettify-tweet-spaces",
+      Bucket: process.env.SPACES_BUCKET,
       ContentType: mimetype,
     })
     .promise()
+
   const url = client.getSignedUrl("getObject", {
     Key,
-    Bucket: "prettify-tweet-spaces",
+    Bucket: process.env.SPACES_BUCKET,
     Expires: 60 * 5,
   })
-  console.log({ url })
+
   return url
 }

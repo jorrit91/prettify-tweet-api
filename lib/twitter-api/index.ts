@@ -34,7 +34,7 @@ export const getTwitterAPI = (): TwitterAPI => {
             "attachments",
             "entities",
           ],
-          "media.fields": ["height", "width", "url"],
+          "media.fields": ["height", "width", "url", "preview_image_url"],
         })
         const normalized = normalizeTweetData(tweet)
 

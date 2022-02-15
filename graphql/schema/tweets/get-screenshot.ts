@@ -1,7 +1,7 @@
 import { extendType, stringArg } from "nexus"
-import fetch from "node-fetch"
+import { getScreenshotImage } from "../../../lib/get-screenshot-image"
 import { uploadFileGetTemporaryUrl } from "../../../lib/s3"
-import { getScreenshot as getPuppeteerScreenshot } from "../../../lib/get-screenshot"
+
 export const getScreenshot = extendType({
   type: "Mutation",
   definition: (t) => {
@@ -16,16 +16,13 @@ export const getScreenshot = extendType({
         const imageType = "png"
 
         try {
-          const screenshot = await getPuppeteerScreenshot({
-            tweetId,
-            color,
-            layout,
-          })
-
           const date = new Date()
+
+          const image = await getScreenshotImage({ tweetId, color, layout })
           const filename = `prettify-tweet-${tweetId}-${color}-${layout}-${date.getTime()}.${imageType}`
+
           const url = await uploadFileGetTemporaryUrl({
-            stream: screenshot,
+            stream: image,
             mimetype: `image/${imageType}`,
             Key: `screenshots/${filename}`,
           })
