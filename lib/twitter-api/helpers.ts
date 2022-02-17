@@ -35,7 +35,7 @@ function getUrlPreview(tweet: TweetV2SingleResult) {
   if (tweet.data.entities && tweet.data.entities.urls) {
     let preview: null | UrlPreview = null
     tweet.data.entities.urls.forEach((item) => {
-      if (item.images.length > 0) {
+      if (item.images && item.images.length > 0) {
         preview = {
           title: item.title,
           url: item.url,
