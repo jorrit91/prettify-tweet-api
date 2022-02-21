@@ -12,6 +12,10 @@ A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `dat
 """
 scalar DateTime
 
+type GetRandomTweetIds {
+  ids: [String]
+}
+
 type GetScreenshot {
   filename: String!
   url: String!
@@ -29,6 +33,7 @@ type Mutation {
 }
 
 type Query {
+  getRandomTweetIds(count: Int): GetRandomTweetIds
   getTweetData(tweetId: String): Tweet
 }
 

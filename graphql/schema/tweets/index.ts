@@ -2,6 +2,7 @@ import { objectType } from "nexus"
 
 export * from "./get-tweet-data"
 export * from "./get-screenshot"
+export * from "./get-random-tweet-ids"
 
 export const Media = objectType({
   name: "Media",
@@ -49,5 +50,12 @@ export const GetScreenshot = objectType({
   definition: (t) => {
     t.nonNull.string("url")
     t.nonNull.string("filename")
+  },
+})
+
+export const GetRandomTweetIds = objectType({
+  name: "GetRandomTweetIds",
+  definition: (t) => {
+    t.list.string("ids")
   },
 })

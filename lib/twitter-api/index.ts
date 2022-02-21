@@ -13,6 +13,7 @@ function getTwitterClient() {
 
 export type TwitterAPI = {
   getTweetById: (id: string) => Promise<SingleTweetData>
+  getRandomTweetIds: (count: number) => Promise<string[]>
 }
 export const getTwitterAPI = (): TwitterAPI => {
   const client = getTwitterClient()
@@ -39,6 +40,18 @@ export const getTwitterAPI = (): TwitterAPI => {
         const normalized = normalizeTweetData(tweet)
 
         return normalized
+      } catch (error) {
+        throw new Error(error)
+      }
+    },
+    async getRandomTweetIds(count: number) {
+      try {
+        const search = await client.v2.search("media", {
+          "tweet.fields": ["id"],
+        })
+        const ids = search.tweets.slice(0, count).map((tweet) => tweet.id)
+
+        return ids
       } catch (error) {
         throw new Error(error)
       }
