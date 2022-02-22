@@ -2,7 +2,7 @@ export type Media = {
   height?: number
   width?: number
   url: string
-  type: "video" | "photo"
+  type: "video" | "photo" | "animated_gif"
 }
 
 export type UrlPreview = {

@@ -87,6 +87,9 @@ function getMediaItems(tweet: TweetV2SingleResult): Media[] {
       if (item.type === "photo") {
         media.push(item as Media)
       }
+      if (item.type === "animated_gif") {
+        media.push({ ...(item as Media), url: item.preview_image_url })
+      }
       if (item.type === "video") {
         media.push({ ...(item as Media), url: item.preview_image_url })
       }
