@@ -53,6 +53,8 @@ function getText(tweet: TweetV2SingleResult) {
   let text: string = tweet.data.text
 
   if (tweet.data.entities) {
+    console.log(tweet)
+    console.log(tweet.data.entities)
     if (tweet.data.entities.urls) {
       tweet.data.entities.urls.forEach((url) => {
         // Remove picture urls from body text
@@ -73,6 +75,20 @@ function getText(tweet: TweetV2SingleResult) {
           `@${mention.username}`,
           `<span>@${mention.username}</span>`
         )
+      })
+    }
+
+    if (tweet.data.entities.hashtags) {
+      tweet.data.entities.hashtags.forEach((mention) => {
+        // Wrap hashtags in a span
+        text = text.replace(`#${mention.tag}`, `<span>#${mention.tag}</span>`)
+      })
+    }
+
+    if (tweet.data.entities.cashtags) {
+      tweet.data.entities.cashtags.forEach((mention) => {
+        // Wrap hashtags in a span
+        text = text.replace(`$${mention.tag}`, `<span>$${mention.tag}</span>`)
       })
     }
   }
