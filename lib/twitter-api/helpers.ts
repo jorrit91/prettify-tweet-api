@@ -38,7 +38,7 @@ function getUrlPreview(tweet: TweetV2SingleResult) {
       if (item.images && item.images.length > 0) {
         preview = {
           title: item.title,
-          url: item.url,
+          url: item.unwound_url,
           imageUrl: item.images[0].url,
           description: item.description,
         }
@@ -53,8 +53,6 @@ function getText(tweet: TweetV2SingleResult) {
   let text: string = tweet.data.text
 
   if (tweet.data.entities) {
-    console.log(tweet)
-    console.log(tweet.data.entities)
     if (tweet.data.entities.urls) {
       tweet.data.entities.urls.forEach((url) => {
         // Remove picture urls from body text
