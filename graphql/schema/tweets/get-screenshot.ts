@@ -19,7 +19,7 @@ export const getScreenshot = extendType({
           const date = new Date()
 
           const image = await getScreenshotImage({ tweetId, color, layout })
-          const filename = `prettify-tweet-${tweetId}-${color}-${layout}-${date.getTime()}.${imageType}`
+          const filename = `prettify-tweet-${tweetId}-${date.getTime()}.${imageType}`
 
           const url = await uploadFileGetTemporaryUrl({
             stream: image,
