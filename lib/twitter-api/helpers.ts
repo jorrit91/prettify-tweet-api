@@ -40,7 +40,7 @@ function getUrlPreview(tweet: TweetV2SingleResult) {
           title: item.title,
           url: item.unwound_url,
           imageUrl: item.images[0].url,
-          description: item.description,
+          description: item.description || '', 
         }
       }
     })
